@@ -1,0 +1,37 @@
+`timescale 1 ps/ 1 ps
+module gm_test();
+
+	reg CLK_80Mhz;
+	reg RSTn;
+																 
+	wire [3:0]SQ_i;
+	wire [4:0]SQ_X;
+	wire [6:0]SQ_Y;
+	wire [6:0]SQ_Addr;
+	wire SQ_isCount;
+	wire SQ_isWrite;
+	
+	/*******************************/
+      
+	gm U1 
+	(
+		.CLK(CLK_80Mhz),
+		.RSTn(RSTn),
+		.SQ_Addr(SQ_Addr),
+		.SQ_X(SQ_X),
+		.SQ_Y(SQ_Y),
+		.SQ_i(SQ_i),
+		.SQ_isCount(SQ_isCount),
+		.SQ_isWrite(SQ_isWrite)
+	);
+	
+	/*******************************/
+	
+	initial                                                
+	begin  
+       RSTn = 0; #1000000; RSTn = 1;
+		 CLK_80Mhz = 1; forever #6250 CLK_80Mhz = ~CLK_80Mhz; 					 
+	end                                                    
+                                            
+endmodule
+
